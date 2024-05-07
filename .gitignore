@@ -1,0 +1,11 @@
+**/bin/*
+**/obj/*
+**/.vs/*
+**.user
+**/lib/*
+
+*Backup.*
+karate.jar
+target/
+s3-data/
+connect-plugins/
