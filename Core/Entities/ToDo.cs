@@ -5,9 +5,12 @@ namespace Core.Entities
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public ToDo(string name)
+        public long TenantId { get; set; }
+
+        public ToDo(string name, long tenantId)
         {
             Name = name;
+            TenantId = tenantId;
         }
 
         public ToDo()

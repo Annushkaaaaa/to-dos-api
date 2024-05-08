@@ -9,6 +9,8 @@ namespace Tests.ApiTests
    
     public class ToDoControllerTests
     {
+        private const long DEFAULT_TENANT_ID = 1;
+
         [Fact]
         public async Task GetAllToDos_ReturnsCorrectToDoList()
         {
@@ -23,7 +25,7 @@ namespace Tests.ApiTests
             };
 
             var toDoServiceMock = new Mock<IToDoService>();
-            toDoServiceMock.Setup(x => x.GetToDos()).ReturnsAsync(expectedToDoList);
+            toDoServiceMock.Setup(x => x.GetToDos(DEFAULT_TENANT_ID)).ReturnsAsync(expectedToDoList);
 
             var controller = new ToDoController(toDoServiceMock.Object);
 
@@ -47,7 +49,7 @@ namespace Tests.ApiTests
             };
 
             var toDoServiceMock = new Mock<IToDoService>();
-            toDoServiceMock.Setup(x => x.GetToDos()).ReturnsAsync(expectedToDoList);
+            toDoServiceMock.Setup(x => x.GetToDos(DEFAULT_TENANT_ID)).ReturnsAsync(expectedToDoList);
 
             var controller = new ToDoController(toDoServiceMock.Object);
 
@@ -64,7 +66,7 @@ namespace Tests.ApiTests
             var expectedId = 1;
 
             var toDoServiceMock = new Mock<IToDoService>();
-            toDoServiceMock.Setup(x => x.AddToDo(addToDoRequest.Name)).ReturnsAsync(expectedId);
+            toDoServiceMock.Setup(x => x.AddToDo(addToDoRequest.Name, DEFAULT_TENANT_ID)).ReturnsAsync(expectedId);
 
             var controller = new ToDoController(toDoServiceMock.Object);
 

@@ -16,23 +16,23 @@ namespace Application.Services
             _toDoQuery = toDoQuery;
             _toDoCommand = toDoCommand;
         }
-        public async Task<long> AddToDo(string toDoName)
+        public async Task<long> AddToDo(string toDoName, long tenantId)
         {
-            var toDo = new ToDo(toDoName);
+            var toDo = new ToDo(toDoName, tenantId);
             return await _toDoCommand.Create(toDo);
         }
 
-        public async Task CompleteToDo(List<long> toDoIds)
+        public async Task CompleteToDo(List<long> toDoIds, long tenantId)
         {
             foreach (var toDoId in toDoIds)
             {
-                await DeleteToDo(toDoId);
+                await DeleteToDo(toDoId, tenantId);
             }
         }
 
-        public async Task DeleteToDo(long toDoId)
+        public async Task DeleteToDo(long toDoId, long tenantId)
         {
-            var toDo = await _toDoQuery.GetById(toDoId);
+            var toDo = await _toDoQuery.GetById(toDoId, tenantId);
             if (toDo == null)
             {
                 throw new Exception("ToDo doesn't exists!");
@@ -40,9 +40,9 @@ namespace Application.Services
             await _toDoCommand.Delete(toDo);
         }
 
-        public async Task<ToDoListDto> GetToDos()
+        public async Task<ToDoListDto> GetToDos(long tenantId)
         {
-            var toDoList = await _toDoQuery.GetAll();
+            var toDoList = await _toDoQuery.GetAll(tenantId);
             var toDoListDto = toDoList.Select(toDo => new ToDoDto { Id = toDo.Id, Name = toDo.Name }).ToList();
             return new ToDoListDto() { ToDos = toDoListDto };
         }

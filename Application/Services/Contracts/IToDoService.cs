@@ -4,9 +4,9 @@ namespace Application.Services.Contracts
 {
     public interface IToDoService
     {
-        public Task<long> AddToDo(string toDoName);
-        public Task CompleteToDo(List<long> toDoIds);
-        public Task DeleteToDo(long toDoId);
-        public Task<ToDoListDto> GetToDos();
+        public Task<long> AddToDo(string toDoName, long tenantId);
+        public Task CompleteToDo(List<long> toDoIds, long tenantId);
+        public Task DeleteToDo(long toDoId, long tenantId);
+        public Task<ToDoListDto> GetToDos(long tenantId);
     }
 }

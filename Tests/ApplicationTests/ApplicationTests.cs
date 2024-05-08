@@ -10,18 +10,20 @@ namespace Tests.ApplicationTests
 {
     public class ApplicationTests
     {
+        private const long DEFAULT_TENANT_ID = 1;
+
         private readonly List<ToDo> _toDoList = new List<ToDo>()
         {
-            new ToDo { Id = 1, Name = "First todo" },
-            new ToDo { Id = 2, Name = "Second todo" },
-            new ToDo { Id = 3, Name = "Third todo" }
+            new ToDo { Id = 1, Name = "First todo", TenantId = DEFAULT_TENANT_ID },
+            new ToDo { Id = 2, Name = "Second todo", TenantId = DEFAULT_TENANT_ID },
+            new ToDo { Id = 3, Name = "Third todo", TenantId = DEFAULT_TENANT_ID }
         };
 
         [Fact]
         public async Task GetListOfToDos_ReturnsCorrectToDoListAsync()
         {
             var toDoQueryMock = new Mock<IToDoQuery>();
-            toDoQueryMock.Setup(x => x.GetAll()).ReturnsAsync(_toDoList);
+            toDoQueryMock.Setup(x => x.GetAll(DEFAULT_TENANT_ID)).ReturnsAsync(_toDoList);
 
             var expectedResult = new ToDoListDto()
             {
@@ -34,7 +36,7 @@ namespace Tests.ApplicationTests
             };
 
             var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object);
-            var getAllToDosResult = await toDoService.GetToDos();
+            var getAllToDosResult = await toDoService.GetToDos(DEFAULT_TENANT_ID);
 
             // Method to compare two collections
 
@@ -51,7 +53,7 @@ namespace Tests.ApplicationTests
         public async Task GetEmptyListOfToDos_ReturnsCorrectEmptyToDoList()
         {
             var toDoQueryMock = new Mock<IToDoQuery>();
-            toDoQueryMock.Setup(x => x.GetAll()).ReturnsAsync(new List<ToDo>());
+            toDoQueryMock.Setup(x => x.GetAll(DEFAULT_TENANT_ID)).ReturnsAsync(new List<ToDo>());
 
             var expectedResult = new ToDoListDto()
             {
@@ -61,7 +63,7 @@ namespace Tests.ApplicationTests
             };
 
             var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object);
-            var getAllToDosResult = await toDoService.GetToDos();
+            var getAllToDosResult = await toDoService.GetToDos(DEFAULT_TENANT_ID);
 
             // Method to compare two collections
 
@@ -83,7 +85,7 @@ namespace Tests.ApplicationTests
             toDoCommandMock.Setup(x => x.Create(It.IsAny<ToDo>())).ReturnsAsync(toDoToAdd.Id);
 
             var toDoService = new ToDoService(new Mock<IToDoQuery>().Object, toDoCommandMock.Object);
-            var createToDosResult = await toDoService.AddToDo(toDoToAdd.Name);
+            var createToDosResult = await toDoService.AddToDo(toDoToAdd.Name, DEFAULT_TENANT_ID);
 
             Assert.Equal(toDoToAdd.Id, createToDosResult);
         }

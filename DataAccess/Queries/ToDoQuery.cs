@@ -11,17 +11,17 @@ namespace DataAccess.Queries
         {
             _context = context;
         }
-        public async Task<ToDo> GetById(long id)
+        public async Task<ToDo> GetById(long id, long tenantId)
         {
             var toDo = await _context.ToDos
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == id && x.TenantId == tenantId)
                 .SingleOrDefaultAsync();
             return toDo;
         }
 
-        public async Task<List<ToDo>> GetAll()
+        public async Task<List<ToDo>> GetAll(long tenantId)
         {
-            var toDoList = await _context.ToDos.ToListAsync();
+            var toDoList = await _context.ToDos.Where(x => x.TenantId == tenantId).ToListAsync();
             return toDoList;
         }
     }
