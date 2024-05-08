@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Api.Exceptions;
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core;
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core.Options;
 
@@ -74,6 +75,14 @@ builder.Services.AddSwaggerGen(c =>
 );
 
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
 
 app.UseCors(
     corsPolicyBuilder => corsPolicyBuilder
