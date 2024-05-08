@@ -22,6 +22,10 @@ namespace Application.Services
         }
         public async Task<long> AddToDo(string toDoName, long tenantId)
         {
+            if (string.IsNullOrEmpty(toDoName))
+            {
+                throw new ArgumentNullException("Name of toDo cannot be empty or null.");
+            }
             var toDo = new ToDo(toDoName, tenantId);
             return await _toDoCommand.Create(toDo);
         }
@@ -41,7 +45,7 @@ namespace Application.Services
             if (toDo == null)
             {
                 Log.Error(LoggerFormatExtensions.FormatMessage(PROJECT_NAME, "Unable to delete a toDo with id {@toDoId} at {now}. It's not exist"), toDoId, DateTime.Now);
-                throw new Exception("ToDo doesn't exists!");
+                throw new ArgumentNullException("ToDo doesn't exists!");
             }
             await _toDoCommand.Delete(toDo);
         }
