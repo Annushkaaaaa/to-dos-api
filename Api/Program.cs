@@ -3,6 +3,7 @@ using Application;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core;
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core.Options;
 
@@ -19,6 +20,18 @@ builder.Services.AddApplication();
 //var authenticationOptions = configuration.GetSection(nameof(AuthenticationOptions)).Get<AuthenticationOptions>();
 //builder.Services.AddJwtAuthentication(authenticationOptions)
 //    .WithUserClaimsProvider<UserClaimsProvider>(UserClaimsProvider.PermissionClaimType);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .CreateLogger();
+
+builder.Host.ConfigureLogging(logging =>
+    {
+        logging.AddSerilog();
+        logging.SetMinimumLevel(LogLevel.Information);
+    })
+    .UseSerilog();
 
 builder.Services.AddSwaggerGen(c =>
     {

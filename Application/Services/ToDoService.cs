@@ -3,11 +3,15 @@ using Application.Services.Contracts;
 using Core.Entities;
 using DataAccess.Commands.Contracts;
 using DataAccess.Queries.Contracts;
+using Serilog;
+using Utils;
 
 namespace Application.Services
 {
     public class ToDoService : IToDoService
     {
+        private const string PROJECT_NAME = "Application";
+
         private readonly IToDoQuery _toDoQuery;
         private readonly IToDoCommand _toDoCommand;
 
@@ -27,6 +31,7 @@ namespace Application.Services
             foreach (var toDoId in toDoIds)
             {
                 await DeleteToDo(toDoId, tenantId);
+                Log.Information(LoggerFormatExtensions.FormatMessage(PROJECT_NAME, "Completed a toDo with id {@toDoId} at {now}"), toDoId, DateTime.Now);
             }
         }
 
@@ -35,6 +40,7 @@ namespace Application.Services
             var toDo = await _toDoQuery.GetById(toDoId, tenantId);
             if (toDo == null)
             {
+                Log.Error(LoggerFormatExtensions.FormatMessage(PROJECT_NAME, "Unable to delete a toDo with id {@toDoId} at {now}. It's not exist"), toDoId, DateTime.Now);
                 throw new Exception("ToDo doesn't exists!");
             }
             await _toDoCommand.Delete(toDo);

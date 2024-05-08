@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{CCC829BD-12A5-48F6-B86C-71C46899937D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{CCC829BD-12A5-48F6-B86C-71C46899937D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{A32C8580-18C8-48AB-81E1-50A4AE7FCC66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{A32C8580-18C8-48AB-81E1-50A4AE7FCC66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{66955CA3-B1FB-461F-94B2-48541060ED22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{66955CA3-B1FB-461F-94B2-48541060ED22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{21C0025E-33AD-4FB4-9AA1-E1705350D2D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{21C0025E-33AD-4FB4-9AA1-E1705350D2D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{8D917CAD-B782-4212-B86C-72B361E96DB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{8D917CAD-B782-4212-B86C-72B361E96DB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{4F25308C-F3AC-4BEA-BB02-77E10BE550A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8D917CAD-B782-4212-B86C-72B361E96DB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D917CAD-B782-4212-B86C-72B361E96DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D917CAD-B782-4212-B86C-72B361E96DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F25308C-F3AC-4BEA-BB02-77E10BE550A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F25308C-F3AC-4BEA-BB02-77E10BE550A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F25308C-F3AC-4BEA-BB02-77E10BE550A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F25308C-F3AC-4BEA-BB02-77E10BE550A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

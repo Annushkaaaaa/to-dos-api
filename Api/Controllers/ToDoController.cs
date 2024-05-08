@@ -2,6 +2,7 @@ using Api.Requests;
 using Application.Dtos;
 using Application.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Api.Controllers;
 
