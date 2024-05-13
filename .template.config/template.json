@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "TourmalineCore",
+    "classifications": [ "Web" ],
+    "identity": "ToDos.Api",
+    "name": "to-dos-api",
+    "shortName": "todosapi",
+    "sourceName":"todosapi",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    }
+  }
