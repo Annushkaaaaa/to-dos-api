@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Api.Exceptions;
+using Core;
+using NodaTime;
+
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core;
 //using TourmalineCore.AspNetCore.JwtAuthentication.Core.Options;
 
@@ -18,6 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddPersistence(configuration);
 builder.Services.AddApplication();
+builder.Services.AddTransient<IClock, Clock>();
 //var authenticationOptions = configuration.GetSection(nameof(AuthenticationOptions)).Get<AuthenticationOptions>();
 //builder.Services.AddJwtAuthentication(authenticationOptions)
 //    .WithUserClaimsProvider<UserClaimsProvider>(UserClaimsProvider.PermissionClaimType);

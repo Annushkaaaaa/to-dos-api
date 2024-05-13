@@ -4,6 +4,7 @@ using Core.Entities;
 using DataAccess.Commands.Contracts;
 using DataAccess.Queries.Contracts;
 using Moq;
+using NodaTime;
 
 
 namespace Tests.ApplicationTests
@@ -34,8 +35,10 @@ namespace Tests.ApplicationTests
                     new ToDoDto { Id = 3, Name = "Third todo" }
                 }
             };
+            var clockMock = new Mock<IClock>();
+            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
 
-            var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object);
+            var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object, clockMock.Object);
             var getAllToDosResult = await toDoService.GetToDos(DEFAULT_TENANT_ID);
 
             // Method to compare two collections
@@ -61,8 +64,9 @@ namespace Tests.ApplicationTests
                 {
                 }
             };
-
-            var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object);
+            var clockMock = new Mock<IClock>();
+            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
+            var toDoService = new ToDoService(toDoQueryMock.Object, new Mock<IToDoCommand>().Object, clockMock.Object);
             var getAllToDosResult = await toDoService.GetToDos(DEFAULT_TENANT_ID);
 
             // Method to compare two collections
@@ -83,8 +87,9 @@ namespace Tests.ApplicationTests
 
             var toDoCommandMock = new Mock<IToDoCommand>();
             toDoCommandMock.Setup(x => x.Create(It.IsAny<ToDo>())).ReturnsAsync(toDoToAdd.Id);
-
-            var toDoService = new ToDoService(new Mock<IToDoQuery>().Object, toDoCommandMock.Object);
+            var clockMock = new Mock<IClock>();
+            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
+            var toDoService = new ToDoService(new Mock<IToDoQuery>().Object, toDoCommandMock.Object, clockMock.Object);
             var createToDosResult = await toDoService.AddToDo(toDoToAdd.Name, DEFAULT_TENANT_ID);
 
             Assert.Equal(toDoToAdd.Id, createToDosResult);

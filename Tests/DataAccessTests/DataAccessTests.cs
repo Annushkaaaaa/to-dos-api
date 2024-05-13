@@ -5,6 +5,7 @@ using DataAccess.Queries;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
+using NodaTime;
 
 
 namespace Tests.DataAccessTests
@@ -60,8 +61,9 @@ namespace Tests.DataAccessTests
             var dbSetMock = new Mock<DbSet<ToDo>>();
 
             dbContextMock.Setup(x => x.ToDos).Returns(dbSetMock.Object);
-
-            var command = new ToDoCommand(dbContextMock.Object);
+            var clockMock = new Mock<IClock>();
+            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
+            var command = new ToDoCommand(dbContextMock.Object, clockMock.Object);
 
             await command.Create(toDoToAdd);
 
@@ -77,8 +79,9 @@ namespace Tests.DataAccessTests
             var dbSetMock = new Mock<DbSet<ToDo>>();
 
             dbContextMock.Setup(x => x.ToDos).Returns(dbSetMock.Object);
-
-            var command = new ToDoCommand(dbContextMock.Object);
+            var clockMock = new Mock<IClock>();
+            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
+            var command = new ToDoCommand(dbContextMock.Object, clockMock.Object);
 
             await command.Delete(toDoToDelete);
 

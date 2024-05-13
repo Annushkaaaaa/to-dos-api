@@ -3,6 +3,7 @@ using Application.Services.Contracts;
 using Core.Entities;
 using DataAccess.Commands.Contracts;
 using DataAccess.Queries.Contracts;
+using NodaTime;
 using Serilog;
 using Utils;
 
@@ -12,11 +13,13 @@ namespace Application.Services
     {
         private const string PROJECT_NAME = "Application";
 
+        private readonly IClock _clock;
         private readonly IToDoQuery _toDoQuery;
         private readonly IToDoCommand _toDoCommand;
 
-        public ToDoService(IToDoQuery toDoQuery, IToDoCommand toDoCommand)
+        public ToDoService(IToDoQuery toDoQuery, IToDoCommand toDoCommand, IClock clock)
         {
+            _clock = clock;
             _toDoQuery = toDoQuery;
             _toDoCommand = toDoCommand;
         }
@@ -26,7 +29,7 @@ namespace Application.Services
             {
                 throw new ArgumentNullException("Name of toDo cannot be empty or null.");
             }
-            var toDo = new ToDo(toDoName, tenantId);
+            var toDo = new ToDo(toDoName, tenantId, _clock);
             return await _toDoCommand.Create(toDo);
         }
 
@@ -48,6 +51,16 @@ namespace Application.Services
                 throw new ArgumentNullException("ToDo doesn't exists!");
             }
             await _toDoCommand.Delete(toDo);
+        }
+        public async Task SoftDeleteToDo(long toDoId, long tenantId)
+        {
+            var toDo = await _toDoQuery.GetById(toDoId, tenantId);
+            if (toDo == null)
+            {
+                Log.Error(LoggerFormatExtensions.FormatMessage(PROJECT_NAME, "Unable to delete a toDo with id {@toDoId} at {now}. It's not exist"), toDoId, DateTime.Now);
+                throw new ArgumentNullException("ToDo doesn't exists!");
+            }
+            await _toDoCommand.SoftDelete(toDo);
         }
 
         public async Task<ToDoListDto> GetToDos(long tenantId)

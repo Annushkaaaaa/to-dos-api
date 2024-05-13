@@ -6,4 +6,5 @@ public interface IToDoCommand
 {
     public Task<long> Create(ToDo toDo);
     public Task Delete(ToDo toDo);
+    public Task SoftDelete(ToDo toDo);
 }

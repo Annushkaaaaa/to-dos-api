@@ -37,4 +37,9 @@ public class ToDoController : Controller
     {
         await _toDoService.DeleteToDo(toDoId, DEFAULT_TENANT_ID);
     }
+    [HttpDelete("to-dos/soft-delete")]
+    public async Task SoftDeleteToDo([FromQuery] long toDoId)
+    {
+        await _toDoService.SoftDeleteToDo(toDoId, DEFAULT_TENANT_ID);
+    }
 }
