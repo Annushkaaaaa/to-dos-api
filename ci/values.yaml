@@ -17,13 +17,13 @@ replicaCount: 1
 # 1m means 0.1% of processor time.
 # at start pod is being allocated with resources from requests, if it needs more consumption can grow until limits.
 # if pod uses more resources than limits in spite of the reason kube-system will perform a forced restart
-resources:
-  limits:
-    cpu: 50m
-    memory: 100Mi
-  requests:
-    cpu: 1m
-    memory: 50Mi
+# resources:
+#   limits:
+#     cpu: 50m
+#     memory: 100Mi
+#   requests:
+#     cpu: 1m
+#     memory: 50Mi
 
 livenessProbe:
   enabled: false
