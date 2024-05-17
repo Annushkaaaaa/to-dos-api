@@ -1,9 +1,9 @@
 global:
     postgresql:
         auth:
-            postgresPassword: "{{ .secrets.DbName }}"
-            username: "{{ .secrets.postgresUsername }}"
-            password: "{{ .secrets.postgresPassword }}"
+            postgresPassword: "{{ secrets.DbName }}"
+            username: "{{ secrets.postgresUsername }}"
+            password: "{{ secrets.postgresPassword }}"
 
 primary:
     service:
