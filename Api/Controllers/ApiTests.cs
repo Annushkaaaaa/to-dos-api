@@ -3,6 +3,7 @@ using Api.Controllers;
 using Api.Requests;
 using Application.Dtos;
 using Application.Services.Contracts;
+using Xunit;
 
 namespace Tests.ApiTests
 {

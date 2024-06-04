@@ -5,6 +5,7 @@ using DataAccess.Commands.Contracts;
 using DataAccess.Queries.Contracts;
 using Moq;
 using NodaTime;
+using Xunit;
 
 
 namespace Tests.ApplicationTests
