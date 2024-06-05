@@ -31,12 +31,12 @@ jobs:
     - name: Start services
       run: docker-compose up -d
 
-    - name: Wait for services to be ready
-      run: |
-        until $(curl --output /dev/null --silent --head --fail http://localhost:80/actuator/health); do
-          printf '.'
-          sleep 5
-        done
+    # - name: Wait for services to be ready
+    #   run: |
+    #     until $(curl --output /dev/null --silent --head --fail http://localhost:80/actuator/health); do
+    #       printf '.'
+    #       sleep 5
+    #     done
 
     - name: Run Karate Tests
       run: docker-compose run karate_tests
