@@ -30,6 +30,11 @@ To run Karate tests:
 2. Open terminal in this folder
 3. Run `java -jar karate.jar ToDoControllerEnd-to-EndTesting.feature`
 
+OR
+
+1. Run `docker-compose up -d` command in your terminal
+In karate docker-container you can see logs with test run results.
+
 ## Ports
 - localhost:36000 - IDE
 - localhost:35000 - Docker

@@ -1,7 +1,7 @@
 Feature: ToDo Controller End-to-End Testing
 
   Background:
-    * url 'http://localhost:35000/to-dos-api'
+    * url 'http://api/to-dos-api'
 
   Scenario: Verify CRUD operations on ToDo items
   
