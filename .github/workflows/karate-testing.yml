@@ -23,4 +23,4 @@ jobs:
       with:
         url: https://localhost:8080/
         tests: |
-          Api/E2E/ToDoControllerEnd-to-EndTesting.feature
+          ./Api/E2E/ToDoControllerEnd-to-EndTesting.feature
