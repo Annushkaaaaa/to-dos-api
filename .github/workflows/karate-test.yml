@@ -43,7 +43,7 @@ jobs:
 
     - name: Check Karate test result
       run: |
-        docker logs karate_tests | grep -q "Test result: FAILED"
+        docker logs karate-tests | grep -q "Test result: FAILED"
         if [ $? -eq 0 ]; then
           echo "Karate tests failed"
           exit 1
