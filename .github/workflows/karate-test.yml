@@ -3,7 +3,7 @@ name: Karate Tests with Docker Compose
 on:
   push:
     branches:
-      - feature/*
+      - main
 
 jobs:
   test:
@@ -14,9 +14,8 @@ jobs:
         image: docker:20.10.9
         options: --privileged
         ports:
-          - 8080:8080
+          - 35000:35000
           - 5432:5432
-        command: ["dockerd-entrypoint.sh"]
 
     steps:
     - name: Checkout code
@@ -40,5 +39,12 @@ jobs:
         done
 
     - name: Run Karate Tests
+      run: docker-compose run karate_tests
+
+    - name: Check Karate test result
       run: |
-        ./gradlew test
+        docker logs karate_tests | grep -q "Test result: FAILED"
+        if [ $? -eq 0 ]; then
+          echo "Karate tests failed"
+          exit 1
+        fi
