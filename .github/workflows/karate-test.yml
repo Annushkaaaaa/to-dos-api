@@ -13,7 +13,7 @@ jobs:
       backend:
         image: annushkaaaaa/to-dos-api:latest
         ports:
-          - 35000:35000
+          - 8080:8080
         options: --name backend
 
     steps:
