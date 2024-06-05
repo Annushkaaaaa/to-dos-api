@@ -3,7 +3,7 @@ name: Karate Tests with Docker Compose
 on:
   push:
     branches:
-      - main
+      - feature/*
 
 jobs:
   test:
