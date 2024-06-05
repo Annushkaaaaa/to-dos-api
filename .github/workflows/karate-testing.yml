@@ -1,0 +1,26 @@
+name: Karate Tests with Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:20.10.9
+        options: --privileged
+        ports:
+          - 8080:8080
+          - 5432:5432
+
+    steps:
+    - name: API tests
+      uses: erikbos/karate-action@main
+      with:
+        url: https://localhost:8080/
+        tests: |
+          Api/E2E/ToDoControllerEnd-to-EndTesting.feature
