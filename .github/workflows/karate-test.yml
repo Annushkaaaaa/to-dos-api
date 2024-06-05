@@ -14,7 +14,7 @@ jobs:
         image: docker:20.10.9
         options: --privileged
         ports:
-          - 35000:8080
+          - 80:80
           - 5432:5432
 
     steps:
@@ -33,7 +33,7 @@ jobs:
 
     - name: Wait for services to be ready
       run: |
-        until $(curl --output /dev/null --silent --head --fail http://localhost:35000/actuator/health); do
+        until $(curl --output /dev/null --silent --head --fail http://localhost:80/actuator/health); do
           printf '.'
           sleep 5
         done
