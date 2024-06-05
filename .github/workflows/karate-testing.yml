@@ -16,11 +16,11 @@ jobs:
         ports:
           - 8080:8080
           - 5432:5432
-
     steps:
     - name: API tests
       uses: erikbos/karate-action@main
       with:
         url: https://localhost:8080/
         tests: |
-          ./Api/E2E/ToDoControllerEnd-to-EndTesting.feature
+          Api/E2E/ToDoControllerEnd-to-EndTesting.feature
+          
