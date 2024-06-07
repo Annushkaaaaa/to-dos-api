@@ -1,17 +1,14 @@
 using Core.Entities;
 using DataAccess;
-using DataAccess.Commands;
 using DataAccess.Queries;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
-using NodaTime;
 using Xunit;
 
 
 namespace Tests.DataAccessTests
 {
-    public class DataAccessTests
+    public class ToDoQueryTests
     {
         private const long DEFAULT_TENANT_ID = 1;
 
@@ -66,50 +63,6 @@ namespace Tests.DataAccessTests
             var queryResult = query.GetAll(DEFAULT_TENANT_ID).Result;
 
             Assert.Equal(emptyToDoList, queryResult);
-        }
-
-        [Fact]
-        public async Task AddToDoItem_ItemIsAddedSuccessfullyAsync()
-        {
-            var toDoToAdd = new ToDo 
-            { 
-                Id = 1, 
-                Name = "Test adding todo" 
-            };
-
-            var dbContextMock = new Mock<AppDbContext>();
-            var dbSetMock = new Mock<DbSet<ToDo>>();
-
-            dbContextMock.Setup(x => x.ToDos).Returns(dbSetMock.Object);
-            var clockMock = new Mock<IClock>();
-            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
-            var command = new ToDoCommand(dbContextMock.Object, clockMock.Object);
-
-            await command.Create(toDoToAdd);
-
-            dbSetMock.Verify(x => x.AddAsync(toDoToAdd, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async Task DeleteToDo_DeletesToDoItemSuccessfullyAsync()
-        {
-            var toDoToDelete = new ToDo 
-            { 
-                Id = 1, 
-                Name = "Test deleteing todo" 
-            };
-
-            var dbContextMock = new Mock<AppDbContext>();
-            var dbSetMock = new Mock<DbSet<ToDo>>();
-
-            dbContextMock.Setup(x => x.ToDos).Returns(dbSetMock.Object);
-            var clockMock = new Mock<IClock>();
-            clockMock.Setup(x => x.GetCurrentInstant()).Returns(Instant.MaxValue);
-            var command = new ToDoCommand(dbContextMock.Object, clockMock.Object);
-
-            await command.Delete(toDoToDelete);
-
-            dbSetMock.Verify(x => x.Remove(toDoToDelete), Times.Once);
         }
     }
 }
