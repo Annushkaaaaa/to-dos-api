@@ -14,21 +14,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.0.0
 
-    - name: Restore application dependencies
-      run: dotnet restore
-
-    - name: Build application
-      run: dotnet build
-
-    - name: Run application
-      run: dotnet run --project api
+    - uses: actions/checkout@v2
+    - name: Docker compose
+        run: docker-compose up -d
 
     - name: API tests
       uses: erikbos/karate-action@main
       with:
-        url: http://localhost:36000/
+        url: http://localhost:35000/
         tests: |
           Api/E2E/ToDoControllerEnd-to-EndTesting.feature
