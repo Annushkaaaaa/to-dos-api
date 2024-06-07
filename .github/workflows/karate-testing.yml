@@ -19,11 +19,14 @@ jobs:
       run: docker-compose up -d
     - name: Run Karate tests
       run: |
-        docker-compose up --abort-on-container-exit --exit-code-from karate-tests
-        exit_code=$?
-        if [ $exit_code -eq 0 ]; then
-          echo "Tests passed successfully!"
-        else
-          echo "Tests failed!"
+        docker-compose up --abort-on-container-exit
+    - name: Extract test results
+      run: |
+        PASSED=$(docker-compose logs karate-tests | grep "passed:" | sed 's/.*passed: *\([0-9]*\).*/\1/')
+        FAILED=$(docker-compose logs karate-tests | grep "failed:" | sed 's/.*failed: *\([0-9]*\).*/\1/')
+        echo "Passed tests: $PASSED"
+        echo "Failed tests: $FAILED"
+        if [ $FAILED -gt 0 ]; then
+          echo "Failed tests found! Failing the pipeline..."
           exit 1
         fi
