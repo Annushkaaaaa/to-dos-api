@@ -24,6 +24,7 @@ jobs:
       # We waiting for `Some log text... passed: 5 ...more log text` in logs
       run: |
         FAILED=$(docker-compose logs karate-tests | grep -oP 'failed: *\K\d+')
+        echo "Failed tests: $FAILED"
         if [ $FAILED -gt 0 ]; then
           echo "Failed tests found! Failing the pipeline..."
           exit 1
