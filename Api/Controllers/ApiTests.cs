@@ -18,11 +18,23 @@ namespace Tests.ApiTests
             var expectedToDoList = new ToDoListDto
             {
                 ToDos = new List<ToDoDto>
-            {
-                new ToDoDto { Id = 1, Name = "First todo" },
-                new ToDoDto { Id = 2, Name = "Second todo" },
-                new ToDoDto { Id = 3, Name = "Third todo" }
-            }
+                {
+                    new ToDoDto 
+                    { 
+                        Id = 1, 
+                        Name = "First todo" 
+                    },
+                    new ToDoDto 
+                    { 
+                        Id = 2, 
+                        Name = "Second todo" 
+                    },
+                    new ToDoDto 
+                    { 
+                        Id = 3, 
+                        Name = "Third todo" 
+                    }
+                }
             };
 
             var toDoServiceMock = new Mock<IToDoService>();
@@ -63,7 +75,10 @@ namespace Tests.ApiTests
         [Fact]
         public async Task AddToDo_ReturnsAddedToDoId()
         {
-            var addToDoRequest = new AddToDoRequest { Name = "New ToDo" };
+            var addToDoRequest = new AddToDoRequest 
+            { 
+                Name = "New ToDo" 
+            };
             var expectedId = 1;
 
             var toDoServiceMock = new Mock<IToDoService>();

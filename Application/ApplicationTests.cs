@@ -16,9 +16,24 @@ namespace Tests.ApplicationTests
 
         private readonly List<ToDo> _toDoList = new List<ToDo>()
         {
-            new ToDo { Id = 1, Name = "First todo", TenantId = DEFAULT_TENANT_ID },
-            new ToDo { Id = 2, Name = "Second todo", TenantId = DEFAULT_TENANT_ID },
-            new ToDo { Id = 3, Name = "Third todo", TenantId = DEFAULT_TENANT_ID }
+            new ToDo 
+            { 
+                Id = 1, 
+                Name = "First todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            },
+            new ToDo 
+            { 
+                Id = 2, 
+                Name = "Second todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            },
+            new ToDo 
+            { 
+                Id = 3, 
+                Name = "Third todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            }
         };
 
         [Fact]
@@ -31,9 +46,21 @@ namespace Tests.ApplicationTests
             {
                 ToDos = new List<ToDoDto>()
                 {
-                    new ToDoDto { Id = 1, Name = "First todo" },
-                    new ToDoDto { Id = 2, Name = "Second todo" },
-                    new ToDoDto { Id = 3, Name = "Third todo" }
+                    new ToDoDto 
+                    { 
+                        Id = 1, 
+                        Name = "First todo" 
+                    },
+                    new ToDoDto 
+                    { 
+                        Id = 2, 
+                        Name = "Second todo" 
+                    },
+                    new ToDoDto 
+                    { 
+                        Id = 3, 
+                        Name = "Third todo" 
+                    }
                 }
             };
             var clockMock = new Mock<IClock>();
@@ -84,7 +111,11 @@ namespace Tests.ApplicationTests
         [Fact]
         public async Task AddToDoItem_ItemIsAddedSuccessfullyAsync()
         {
-            var toDoToAdd = new ToDo { Id = 1, Name = "Test adding todo" };
+            var toDoToAdd = new ToDo 
+            { 
+                Id = 1, 
+                Name = "Test adding todo" 
+            };
 
             var toDoCommandMock = new Mock<IToDoCommand>();
             toDoCommandMock.Setup(x => x.Create(It.IsAny<ToDo>())).ReturnsAsync(toDoToAdd.Id);

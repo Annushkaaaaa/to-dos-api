@@ -17,9 +17,24 @@ namespace Tests.DataAccessTests
 
         private readonly List<ToDo> _toDoList = new List<ToDo>()
         {
-            new ToDo { Id = 1, Name = "First todo", TenantId = DEFAULT_TENANT_ID },
-            new ToDo { Id = 2, Name = "Second todo", TenantId = DEFAULT_TENANT_ID },
-            new ToDo { Id = 3, Name = "Third todo", TenantId = DEFAULT_TENANT_ID }
+            new ToDo 
+            { 
+                Id = 1, 
+                Name = "First todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            },
+            new ToDo 
+            { 
+                Id = 2, 
+                Name = "Second todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            },
+            new ToDo 
+            { 
+                Id = 3, 
+                Name = "Third todo", 
+                TenantId = DEFAULT_TENANT_ID 
+            }
         };
 
         [Fact]
@@ -56,7 +71,11 @@ namespace Tests.DataAccessTests
         [Fact]
         public async Task AddToDoItem_ItemIsAddedSuccessfullyAsync()
         {
-            var toDoToAdd = new ToDo { Id = 1, Name = "Test adding todo" };
+            var toDoToAdd = new ToDo 
+            { 
+                Id = 1, 
+                Name = "Test adding todo" 
+            };
 
             var dbContextMock = new Mock<AppDbContext>();
             var dbSetMock = new Mock<DbSet<ToDo>>();
@@ -74,7 +93,11 @@ namespace Tests.DataAccessTests
         [Fact]
         public async Task DeleteToDo_DeletesToDoItemSuccessfullyAsync()
         {
-            var toDoToDelete = new ToDo { Id = 1, Name = "Test deleteing todo" };
+            var toDoToDelete = new ToDo 
+            { 
+                Id = 1, 
+                Name = "Test deleteing todo" 
+            };
 
             var dbContextMock = new Mock<AppDbContext>();
             var dbSetMock = new Mock<DbSet<ToDo>>();
