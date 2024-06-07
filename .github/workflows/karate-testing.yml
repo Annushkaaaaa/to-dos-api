@@ -25,7 +25,6 @@ jobs:
       # Making sure that the failed string comes from the karate-tests container using a regular expression
       run: |
         FAILED=$(docker-compose logs karate-tests | grep -oP 'failed: \K\d+')
-        echo "Failed tests: $FAILED"
         if [ "$FAILED" -gt 0 ]; then
           echo "Failed tests found! Failing the pipeline..."
           exit 1
