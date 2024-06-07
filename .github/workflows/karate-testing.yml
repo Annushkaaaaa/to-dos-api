@@ -1,26 +1,31 @@
-name: Karate Tests with Docker Compose
+name: api tests
 
 on:
   push:
     branches:
-      - feature/*
+      - 'feature/*' 
+      
+  pull_request:
 
+env:
+  GITHUB_REGISTRY: ghcr.io
+  
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      docker:
-        image: docker:20.10.9
-        options: --privileged
-        ports:
-          - 8080:8080
-          - 5432:5432
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+
+    - name: Restore application dependencies
+        run: dotnet restore
+
+    - name: Build application
+      run: dotnet build
+
     - name: API tests
       uses: erikbos/karate-action@main
       with:
-        url: https://localhost:8080/
+        url: https://localhost:35000/
         tests: |
           Api/E2E/ToDoControllerEnd-to-EndTesting.feature
-          
