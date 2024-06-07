@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432:5432
+      - 6432:5432
     networks:
       - basic-network
 
@@ -27,7 +27,7 @@ services:
         limits:
           memory: 150M
     ports:
-      - 8080:8080
+      - 35000:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Host=db;port=5432;Database=postgres
