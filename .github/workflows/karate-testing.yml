@@ -14,14 +14,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-
     - uses: actions/checkout@v2
     - name: Docker compose
       run: docker-compose up -d
-
-    - name: API tests
-      uses: erikbos/karate-action@main
-      with:
-        url: http://localhost:35000/
-        tests: |
-          Api/E2E/ToDoControllerEnd-to-EndTesting.feature
+    - name: Run Karate tests
+      run: |
+        docker-compose up --abort-on-container-exit --exit-code-from karate-tests
+        exit_code=$?
+        if [ $exit_code -eq 0 ]; then
+          echo "Tests passed successfully!"
+        else
+          echo "Tests failed!"
+          exit 1
+        fi
