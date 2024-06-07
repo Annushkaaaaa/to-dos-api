@@ -23,9 +23,12 @@ jobs:
     - name: Build application
       run: dotnet build
 
+    - name: Run application
+      run: dotnet run
+
     - name: API tests
       uses: erikbos/karate-action@main
       with:
-        url: https://localhost:35000/
+        url: http://localhost:35000/
         tests: |
           Api/E2E/ToDoControllerEnd-to-EndTesting.feature
