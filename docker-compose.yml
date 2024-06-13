@@ -43,6 +43,8 @@ services:
     depends_on:
       - api
     command: ["karate", "/karate"]
+    volumes:
+      - ./Api/E2E:/karate
     networks:
       - basic-network
 
