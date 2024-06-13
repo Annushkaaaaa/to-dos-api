@@ -36,5 +36,17 @@ services:
     networks:
       - basic-network
 
+  karate-tests:
+    build:
+      dockerfile: Dockerfile-Karate
+      context: .
+    depends_on:
+      - api
+    command: ["karate", "/karate"]
+    volumes:
+      - ./Api/E2E:/karate
+    networks:
+      - basic-network
+
 networks:
   basic-network:

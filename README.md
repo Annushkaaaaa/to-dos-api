@@ -28,7 +28,12 @@ If you got an error, use `dotnet new --install . --force` command
 To run Karate tests:
 1. Download [karate.jar](https://github.com/karatelabs/karate/releases/download/v1.4.1/karate-1.4.1.jar) file and put it into Tests/E2E folder, also rename it to `karate.jar`
 2. Open terminal in this folder
-3. Run `java -jar karate.jar ToDoControllerEnd-to-EndTesting.feature`
+3. Run `java -jar karate.jar .`
+
+OR
+
+1. Run `docker-compose up -d` command in your terminal
+In karate docker-container you can see logs with test run results.
 
 ## Ports
 - localhost:36000 - IDE

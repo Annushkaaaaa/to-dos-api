@@ -3,9 +3,8 @@
 **/.vs/*
 **.user
 **/lib/*
+.vscode
 
 *Backup.*
 karate.jar
 target/
-s3-data/
-connect-plugins/
